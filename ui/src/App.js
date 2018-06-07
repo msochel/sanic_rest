@@ -6,8 +6,6 @@ class App extends Component {
   constructor () {
     super()
     this.state = {value: ''};
-    this.handleClick = this.handleClick.bind(this)
-    this.handleChange = this.handleChange.bind(this);
   }
 
   handleChange(event) {
@@ -15,25 +13,30 @@ class App extends Component {
   }
 
   handleClick(event) {
-      request
-      .post('http://localhost:80/backend/post')
+    request
+      .post('http://localhost/backend/post')
       .send({"Name": "Mauro"})
       .then(res => {
         console.log(res);
       }, err => {
         console.log(err);
       });
-    }
+  }
 
   render() {
     return (
-      <form onSubmit={This.habdleClick.bind(this)}>
-        <label>
-          Name:
-          <input type="text" value="mierda" onChange={this.handleChange}/>
-        </label>
-        <input type="submit" value="Submit" />
-      </form>
+      <div>
+        <input
+          type="text"
+          value={this.state.value}
+          onChange={(e) => this.handleChange(e)}
+        />
+        <input
+          type="button"
+          value="Click"
+          onClick={(e) => this.handleClick(e)}
+        />
+      </div>
     );
   }
 }
