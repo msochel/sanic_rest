@@ -1,21 +1,40 @@
-import React, { Component } from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { Component } from 'react'
+import request from 'superagent';
+import './App.css'
 
 class App extends Component {
+  constructor () {
+    super()
+    this.state = {value: ''};
+    this.handleClick = this.handleClick.bind(this)
+    this.handleChange = this.handleChange.bind(this);
+  }
+
+  handleChange(event) {
+    this.setState({value: event.target.value});
+  }
+
+  handleClick(event) {
+      request
+      .post('http://localhost:80/backend/post')
+      .send({"Name": "Mauro"})
+      .then(res => {
+        console.log(res);
+      }, err => {
+        console.log(err);
+      });
+    }
+
   render() {
     return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h1 className="App-title">Welcome to React</h1>
-        </header>
-        <p className="App-intro">
-          To get started, edit <code>src/App.js</code> and save to reload.
-        </p>
-      </div>
+      <form onSubmit={This.habdleClick.bind(this)}>
+        <label>
+          Name:
+          <input type="text" value="mierda" onChange={this.handleChange}/>
+        </label>
+        <input type="submit" value="Submit" />
+      </form>
     );
   }
 }
-
-export default App;
+export default App
