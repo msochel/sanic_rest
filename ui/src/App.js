@@ -15,7 +15,7 @@ class App extends Component {
   handleClick(event) {
     request
       .post('http://localhost/backend/post')
-      .send({"Name": "Mauro"})
+      .send({"Name": "Soche"})
       .then(res => {
         console.log(res);
       }, err => {
@@ -31,6 +31,8 @@ class App extends Component {
           value={this.state.value}
           onChange={(e) => this.handleChange(e)}
         />
+        Holaaa
+        Dios
         <input
           type="button"
           value="Click"
