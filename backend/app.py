@@ -25,9 +25,16 @@ def get_handler(request):
         return json({ 'data': list(db.records.find()) })
     return json({ })
 
+def delete_handler(request, _id):
+    if request.method == "DELETE":
+        deleted_id = db.records.find_one_and_delete({'_id': _id})
+        return json({'id': str(deleted_id)})
+    return json({ })
+
 CORS(app)
 app.add_route(post_handler, '/backend/post', methods=["POST", "OPTIONS"])
 app.add_route(get_handler, '/backend/get', methods=["GET", "OPTIONS"])
+app.add_route(delete_handler, '/backend/delete/<_id>', methods=["DELETE", "OPTIONS"])
 
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=80)
